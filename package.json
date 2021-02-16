@@ -2,10 +2,12 @@
   "name": "HRtranslator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "seed": "node seed.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,17 +21,34 @@
   },
   "homepage": "https://github.com/KensukeSakama/HRtranslator#readme",
   "dependencies": {
+    "ajax": "0.0.4",
     "axios": "^0.21.1",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "framer-motion": "^3.2.1",
+    "jquery": "^3.5.1",
+    "mysql": "^2.18.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-test-renderer": "^17.0.1",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "babel-preset-airbnb": "^5.0.0",
+    "css-loader": "^5.0.1",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "file-loader": "^6.2.0",
     "nodemon": "^2.0.7",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "webpack": "^5.21.2",
-    "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "style-loader": "^2.0.0",
+    "svg-url-loader": "^7.1.1",
+    "webpack": "^5.15.0",
+    "webpack-cli": "^4.3.1"
   }
 }
