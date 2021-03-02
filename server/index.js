@@ -16,14 +16,16 @@ app.listen(port, () => {
 app.get('/api/:word', (req, res) => {
   let word = req.params.word;
   console.log(word);
-  axios.get(`http://lookup.dbpedia.org/api/search/Search?QueryClass=software&MaxHits=3&QueryString=${word}`)
+  console.time(`API call for ${word}`)
+  axios.get(`http://lookup.dbpedia.org/api/search/Search?QueryClass=software&MaxHits=5&QueryString=${word}`)
   .then((result) => {
     let data = result.data;
     parseString(data, (err, result) => {
       let allData = result.ArrayOfResults.Result
       let extract = [];
       allData.map(data => {
-        console.log('data', data.Classes[0].Class);
+        console.log('data', data);
+        console.log('label', data.Label);
         let category = data.Classes[0].Class;
         let notGame = true;
         for (let i = 0; i < category.length; i++) {
@@ -31,18 +33,24 @@ app.get('/api/:word', (req, res) => {
             notGame = false;
           }
         }
+        let relavantLabel = false;
+        // if (data.Label[0].includes(word) {
+
+        // }
         // console.log('string', category);
-        if (notGame) {
+        if (notGame && data.Label[0].toLowerCase().includes(word.toLowerCase())) {
           let oneData = {}
           oneData.label = data.Label;
           oneData.uri = data.URI;
           oneData.description = data.Description;
           oneData.classes = data.Classes;
-          oneData.refcount = data.RefCount;
+          oneData.refcount = data.Refcount;
+          console.log(data.RefCount)
           extract.push(oneData)
         }
       })
       // console.log(allData);
+      console.timeEnd(`API call for ${word}`)
       res.send(extract);
     });
 

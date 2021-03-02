@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import InputField from './components/Input.jsx';
 import Descriptions from './components/Descriptions.jsx';
+
 import Common from './components/CommonWords.jsx';
-import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class App extends Component {
   constructor() {
@@ -35,14 +40,18 @@ class App extends Component {
     event.preventDefault();
     this.setState({
       words: [],
-      sentence: ''
+      sentence: '',
+      descriptions: {}
     })
   }
 
   handleSubmit(event) {
-    // event.preventDefault()
+    event.preventDefault()
     // debugger;
-    let splitWords = this.state.sentence.replace('\n',' ').replace('.',' ').split(' ')
+    this.setState({
+      descriptions: {}
+    })
+    let splitWords = this.state.sentence.replace('\n',' ').replace('?','').replace('!',' ').split(' ')
     let filtered = [];
     for (let i = 0; i < splitWords.length; i++) {
       if (Common[splitWords[i]] === undefined) {
@@ -73,24 +82,32 @@ class App extends Component {
         console.log('handleMultiGet', currentWord, err)
       })
       .finally(() => {
-        console.log(this.state.descriptions);
+        console.log('description', this.state.descriptions);
       })
   }
 
   render() {
     return (
-      <div>
-        <h1>Hello</h1>
-        <InputField
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleClear={this.handleClear}
-          sentence={this.state.sentence}
-        />
-        <Descriptions
-          descriptions={this.state.descriptions}
-        />
-      </div>
+      <Container fluid>
+        <Row>
+        <h1>HRR Glossary!!!</h1>
+        </Row>
+        <Row>
+          <Col>
+            <InputField
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleClear={this.handleClear}
+              sentence={this.state.sentence}
+            />
+          </Col>
+          <Col>
+            <Descriptions
+              descriptions={this.state.descriptions}
+            />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
