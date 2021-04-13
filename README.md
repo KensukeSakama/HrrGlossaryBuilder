@@ -12,3 +12,6 @@ The external API is specified to respond with only software-related terms.  Sinc
 > #2: run "npm run build" in the terminal to transpile
 > #3: run "npm start" to start the express server (Port# is 3030)
 > #4: open a browser and access "localhost:3030" to start interacting with the app.
+
+## Node Version:
+> Please make sure you are running the latest stable version of Node.

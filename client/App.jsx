@@ -90,7 +90,7 @@ class App extends Component {
     return (
       <Container fluid>
         <Row>
-        <h1>HRR Glossary!!!</h1>
+        <h1>Glossary Builder</h1>
         </Row>
         <Row>
           <Col>
